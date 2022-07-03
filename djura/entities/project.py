@@ -1,8 +1,9 @@
 from dataclasses import dataclass
+from typing import Mapping
 
-from djura.entities.directory import Directory
+from djura.entities.file import File
 
 
 @dataclass(frozen=True)
 class Project:
-    root: Directory
+    files: Mapping[str, File]

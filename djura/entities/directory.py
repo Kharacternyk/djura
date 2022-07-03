@@ -5,4 +5,4 @@ from djura.entities.file import File
 
 @dataclass(frozen=True)
 class Directory(File):
-    files: frozenset[File]
+    children: frozenset[str]
