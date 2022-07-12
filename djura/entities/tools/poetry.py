@@ -1,6 +1,7 @@
 from djura.entities.filename import Filename
 from djura.entities.project import Project
 from djura.entities.tool import Tool
+from djura.entities.version import Version
 
 
 class Poetry(Tool):
@@ -10,3 +11,6 @@ class Poetry(Tool):
             return frozenset({Poetry()})
         else:
             return frozenset()
+
+    def does_version_fit(self, version: Version) -> bool:
+        return True
