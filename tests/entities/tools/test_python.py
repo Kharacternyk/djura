@@ -27,9 +27,6 @@ def test_poetry_version_patterns_are_correctly_parsed(pattern, version, does_fit
         }
     )
     pythons = Python.get_required_instances(project)
-
     assert len(pythons) == 1
-
     python = next(iter(pythons))
-
     assert python.does_version_fit(Version(version)) == does_fit
