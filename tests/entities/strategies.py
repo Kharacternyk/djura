@@ -11,7 +11,13 @@ from djura.entities.file import File
 from djura.entities.filename import Filename
 from djura.entities.project import Project
 
-SPECIAL_FILES = tuple(Filename(filename) for filename in ["poetry.lock"])
+SPECIAL_FILES = tuple(
+    Filename(filename)
+    for filename in [
+        "poetry.lock",
+        "yarn.lock",
+    ]
+)
 
 
 @composite

@@ -4,6 +4,7 @@ from djura.entities.project import Project
 from djura.entities.tool import Tool
 from djura.entities.tools.poetry import Poetry
 from djura.entities.tools.python import Python
+from djura.entities.tools.yarn import Yarn
 
 
 @dataclass(frozen=True)
@@ -13,6 +14,6 @@ class Toolkit:
     @staticmethod
     def from_project(project: Project) -> "Toolkit":
         tools: set[Tool] = set()
-        for toolClass in (Poetry, Python):
+        for toolClass in (Poetry, Python, Yarn):
             tools.update(toolClass.get_required_instances(project))  # type: ignore
         return Toolkit(frozenset(tools))
