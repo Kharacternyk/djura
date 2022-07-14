@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import cast
 
@@ -16,7 +18,7 @@ class Python(Tool):
     _poetry_version: VersionTypes | None
 
     @staticmethod
-    def get_required_instances(project: Project) -> frozenset["Python"]:
+    def get_required_instances(project: Project) -> frozenset[Python]:
         pyproject = project.files.get(Filename("pyproject.toml"))
         if not pyproject:
             return frozenset()
