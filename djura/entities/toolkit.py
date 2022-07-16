@@ -7,11 +7,13 @@ from djura.entities.project import Project
 from djura.entities.tool import Tool
 from djura.entities.tools.poetry import Poetry
 from djura.entities.tools.python import Python
+from djura.entities.tools.sam_cli import SamCli
 from djura.entities.tools.yarn import Yarn
 
 TOOL_CLASSES: Iterable[Type[Tool]] = (
     Poetry,
     Python,
+    SamCli,
     Yarn,
 )
 
