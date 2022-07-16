@@ -1,11 +1,20 @@
-from hypothesis import given
+from modulefinder import ModuleFinder
+from pathlib import Path
+from pkgutil import iter_modules
 
-from djura.entities.toolkit import Toolkit
-from tests.entities.strategies import SPECIAL_FILES, projects
+DJURA_ENTITIES_PATH = Path(__file__).parent.parent.with_name("djura") / "entities"
+TOOKIT_MODULE_PATH, TOOLS_MODULES_PATH = (
+    str((DJURA_ENTITIES_PATH / filename).resolve())
+    for filename in ("toolkit.py", "tools")
+)
 
 
-@given(projects())
-def test_toolkit_is_not_empty_if_there_are_special_files_in_the_project(project):
-    toolkit = Toolkit.from_project(project)
-    if frozenset(project.files).intersection(SPECIAL_FILES):
-        assert toolkit.tools
+def test_toolkit_imports_all_tools():
+    finder = ModuleFinder()
+    finder.run_script(TOOKIT_MODULE_PATH)
+    tools_modules = set(
+        f"djura.entities.tools.{module.name}"
+        for module in iter_modules([TOOLS_MODULES_PATH])
+    )
+    assert tools_modules
+    assert not tools_modules.difference(finder.modules.keys())
