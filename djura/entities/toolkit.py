@@ -1,7 +1,7 @@
-from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import Iterable, Type
+
+from typing_extensions import Self
 
 from djura.entities.project import Project
 from djura.entities.tool import Tool
@@ -22,8 +22,8 @@ TOOL_CLASSES: Iterable[Type[Tool]] = {
 class Toolkit:
     tools: frozenset[Tool]
 
-    @staticmethod
-    def from_project(project: Project) -> Toolkit:
+    @classmethod
+    def from_project(cls, project: Project) -> Self:
         tools: set[Tool] = set()
         for toolClass in TOOL_CLASSES:
             tools.update(toolClass.get_required_instances(project))
