@@ -1,4 +1,4 @@
-from __future__ import annotations
+from typing_extensions import Self
 
 from djura.entities.filename import Filename
 from djura.entities.project import Project
@@ -10,9 +10,7 @@ class FilenameTriggeredTool(Tool):
     filename: str
 
     @classmethod
-    def get_required_instances(
-        cls, project: Project
-    ) -> frozenset[FilenameTriggeredTool]:
+    def get_required_instances(cls, project: Project) -> frozenset[Self]:
         if Filename(cls.filename) in project.files:
             return frozenset({cls()})
         else:

@@ -1,11 +1,10 @@
-from __future__ import annotations
-
 from dataclasses import dataclass
 from typing import cast
 
 import tomli
 from poetry.core.semver import Version as PoetryVersion
 from poetry.core.semver import VersionTypes, parse_constraint
+from typing_extensions import Self
 
 from djura.entities.filename import Filename
 from djura.entities.project import Project
@@ -17,8 +16,8 @@ from djura.entities.version import Version
 class Python(Tool):
     _poetry_version: VersionTypes | None
 
-    @staticmethod
-    def get_required_instances(project: Project) -> frozenset[Python]:
+    @classmethod
+    def get_required_instances(cls, project: Project) -> frozenset[Self]:
         pyproject = project.files.get(Filename("pyproject.toml"))
         if not pyproject:
             return frozenset()
