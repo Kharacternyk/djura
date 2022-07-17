@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "djura"
 version = "0.1.0"
-description = "Automatic fetching of development tools via Nix."
+description = "Automatic installation and management of development tools."
 authors = ["Nazar Vinnichuk <nazar@vinnich.uk>"]
 license = "GPL-3.0-or-later"
 
